@@ -29,7 +29,7 @@ def main():
         # add the player to the screen
         player.draw(screen)
 
-        # moving (left and right)
+        # moving (left, right, forward, backward)
         player.update(dt)
 
         # update the screen
