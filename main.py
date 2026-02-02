@@ -29,6 +29,9 @@ def main():
         # add the player to the screen
         player.draw(screen)
 
+        # moving (left and right)
+        player.update(dt)
+
         # update the screen
         pygame.display.flip()
         
