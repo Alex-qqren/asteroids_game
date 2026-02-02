@@ -24,4 +24,3 @@ class CircleShape(pygame.sprite.Sprite):
         # must override
         pass
     
-  

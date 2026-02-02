@@ -9,16 +9,23 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
 
     pygame.init()    
+    # Variables
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
-
-    # dt = 0
     clock = pygame.time.Clock()
     dt = 0
+    # Sprite Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    # Classes
+    Player.containers = (updatable, drawable)
+    # Class instances
+    player = Player(x=SCREEN_WIDTH/2, y=SCREEN_HEIGHT/2)
 
+    # Game loop
     while True:
         log_state()
 
+        # Quit button functionality
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
@@ -26,11 +33,14 @@ def main():
         # color the screen black
         screen.fill("black")
         
-        # add the player to the screen
-        player.draw(screen)
+            # moving (left, right, forward, backward)
+        for instance in updatable:
+            instance.update(dt)
 
-        # moving (left, right, forward, backward)
-        player.update(dt)
+            # add the player to the screen
+        for instance in drawable:
+            instance.draw(screen) 
+
 
         # update the screen
         pygame.display.flip()
