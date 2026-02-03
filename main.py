@@ -18,6 +18,11 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+
+    # Image
+    image = pygame.image.load("space.webp")
+    image = pygame.transform.scale(image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+    
     # Sprite Groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -39,11 +44,15 @@ def main():
         # Quit button functionality
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                pygame.quit()
+                sys.exit()
         
         # color the screen black
-        screen.fill("black")
-        
+        # screen.fill("black")
+
+        # background image
+        screen.blit(image, (0, 0))
+
         # moving (left, right, forward, backward)
         updatable.update(dt)
 
@@ -65,7 +74,6 @@ def main():
             # add the player to the screen
         for instance in drawable:
             instance.draw(screen) 
-
 
         # update the screen
         pygame.display.flip()
