@@ -47,12 +47,19 @@ def main():
         # moving (left, right, forward, backward)
         updatable.update(dt)
 
+        # player and asteroid collision
         for asteroid in asteroids:
             # if CircleShape.collides_with(asteroid, player):
             if asteroid.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+            # shot and asteroid collision
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    log_event("asteroid_shot")
+                    asteroid.kill()
+                    shot.kill()
 
             # add the player to the screen
         for instance in drawable:
