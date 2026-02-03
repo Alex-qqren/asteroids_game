@@ -54,11 +54,12 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+
             # shot and asteroid collision
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
-                    asteroid.kill()
+                    asteroid.split()
                     shot.kill()
 
             # add the player to the screen
