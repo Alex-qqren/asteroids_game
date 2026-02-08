@@ -47,6 +47,7 @@ class Player(CircleShape):
       self.shoot()
 
   def shoot(self):
+    # without if statement - zerg rush shot (power-up idea)
     if self.shot_coundown > 0:
         return
     self.shot_coundown = PLAYER_SHOOT_COOLDOWN_SECONDS

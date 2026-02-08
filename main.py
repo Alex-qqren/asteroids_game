@@ -7,6 +7,7 @@ from asteroid import *
 from asteroidfield import *
 from shot import *
 from logger import *
+from circleshape import CircleShape
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -58,22 +59,32 @@ def main():
 
         # player and asteroid collision
         for asteroid in asteroids:
-            # if CircleShape.collides_with(asteroid, player):
+            # if CircleShape.collides_with(asteroid, player): == if asteroid.collides_with(player):
             if asteroid.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+            if asteroid.out_of_bonds():
+                asteroid.kill()
 
             # shot and asteroid collision
             for shot in shots:
                 if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
                     asteroid.split()
+                    # comment out for piercing shot (power-up idea)
+                    shot.kill() 
+                if shot.out_of_bonds():
                     shot.kill()
 
             # add the player to the screen
         for instance in drawable:
             instance.draw(screen) 
+        
+        # check if shots get killed
+        # print(f"Active shots after : {len(shots)}")
+        # check if asteroids get killed
+        # print(f"Active asteroids after : {len(asteroids)}")
 
         # update the screen
         pygame.display.flip()
